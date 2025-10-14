@@ -20,8 +20,20 @@ $pessoas = new Pessoa("pdo", "localhost", "root", "");
     <div class="container">
       <div class="form-section">
         <h2 class="mb-4 text-primary">Cadastro de Pessoa</h2>
+        <?php
+        if (isset($_POST['nome'])) {
+          $nome = addslashes($_POST['nome']);
+          $email = addslashes($_POST['email']);
+          $telefone = addslashes($_POST['telefone']);
 
-        <form>
+          if (!empty($nome) && !empty($email) && !empty($telefone)) {
+            if ($pessoas -> addPessoa($nome, $email, $telefone)) { echo "<div class='alert alert-success text-center' role='alert'>Pessoa cadastrada com sucesso!</div>";}
+            else { echo "<div class='alert alert-warning text-center' role='alert'>Email já cadastrado!</div>"; }
+          } else { echo "<div class='alert alert-danger text-center' role='alert'>Preencha todos os campos!</div>"; }
+        }
+        ?>
+
+        <form method="POST">
           <div class="row g-3">
             <div class="col-md-6">
               <label for="inputNome" class="form-label">Nome Completo</label>
@@ -91,7 +103,7 @@ $pessoas = new Pessoa("pdo", "localhost", "root", "");
                   <?php
                   echo "</tr>";
                 }
-              }
+              } else { echo "<tr><td colspan='5' class='text-center'>Nenhuma pessoa cadastrada!</td></tr>"; }
               ?>
             </tbody>
           </table>

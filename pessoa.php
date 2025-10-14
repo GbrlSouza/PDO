@@ -33,6 +33,6 @@ Class Pessoa {
             $pessoa -> execute();
             
             return true;
-        }
+        } else { return false; }
     }
 }
