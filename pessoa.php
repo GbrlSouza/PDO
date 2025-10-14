@@ -30,6 +30,9 @@ Class Pessoa {
             $pessoa -> bindValue(":nome", $nome);
             $pessoa -> bindValue(":email", $email);
             $pessoa -> bindValue(":telefone", $telefone);
+            $pessoa -> execute();
+            
+            return true;
         }
     }
 }
