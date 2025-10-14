@@ -17,35 +17,35 @@ $pessoas = new Pessoa("pdo", "localhost", "root", "");
   </head>
 
   <body>
+    <?php
+    if (isset($_POST['inputNome'])) {
+      $nome = addslashes($_POST['inputNome']);
+      $email = addslashes($_POST['inputEmail']);
+      $telefone = addslashes($_POST['inputTelefone']);
+
+      if (!empty($nome) && !empty($email) && !empty($telefone)) {
+        if ($pessoas -> addPessoa($nome, $email, $telefone)) { echo "<div class='alert alert-success text-center' role='alert'>Pessoa cadastrada com sucesso!</div>";}
+        else { echo "<div class='alert alert-warning text-center' role='alert'>Email já cadastrado!</div>"; }
+      } else { echo "<div class='alert alert-danger text-center' role='alert'>Preencha todos os campos!</div>"; }
+    }
+    ?>
     <div class="container">
       <div class="form-section">
         <h2 class="mb-4 text-primary">Cadastro de Pessoa</h2>
-        <?php
-        if (isset($_POST['nome'])) {
-          $nome = addslashes($_POST['nome']);
-          $email = addslashes($_POST['email']);
-          $telefone = addslashes($_POST['telefone']);
-
-          if (!empty($nome) && !empty($email) && !empty($telefone)) {
-            if ($pessoas -> addPessoa($nome, $email, $telefone)) { echo "<div class='alert alert-success text-center' role='alert'>Pessoa cadastrada com sucesso!</div>";}
-            else { echo "<div class='alert alert-warning text-center' role='alert'>Email já cadastrado!</div>"; }
-          } else { echo "<div class='alert alert-danger text-center' role='alert'>Preencha todos os campos!</div>"; }
-        }
-        ?>
 
         <form method="POST">
           <div class="row g-3">
             <div class="col-md-6">
               <label for="inputNome" class="form-label">Nome Completo</label>
-              <input type="text" class="form-control" id="inputNome" placeholder="Digite o nome completo" required>
+              <input type="text" class="form-control" id="inputNome" name="inputNome" placeholder="Digite o nome completo" required>
             </div>
             <div class="col-md-6">
               <label for="inputEmail" class="form-label">Email</label>
-              <input type="email" class="form-control" id="inputEmail" placeholder="exemplo@dominio.com" required>
+              <input type="email" class="form-control" id="inputEmail" name="inputEmail" placeholder="exemplo@dominio.com" required>
             </div>
             <div class="col-12">
               <label for="inputTelefone" class="form-label">Telefone</label>
-              <input type="tel" class="form-control" id="inputTelefone" placeholder="(XX) XXXXX-XXXX" required>
+              <input type="tel" class="form-control" id="inputTelefone" name="inputTelefone" placeholder="(XX) XXXXX-XXXX" required>
             </div>
             <div class="col-12 mt-4">
               <button type="submit" class="btn btn-success">Cadastrar Pessoa</button>

@@ -21,7 +21,7 @@ Class Pessoa {
     }
 
     public function addPessoa($nome, $email, $telefone) {
-        $pessoa = $this -> pdo -> prepare("selet id from pessoa where email = :email");
+        $pessoa = $this -> pdo -> prepare("select id from pessoa where email = :email");
         $pessoa -> bindValue(":email", $email);
         $pessoa -> execute();
 
