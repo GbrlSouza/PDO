@@ -20,7 +20,7 @@ Class Pessoa {
         return $pessoas -> fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function addPessoa($nome, $email, $telefone) {
+    public function addPessoa($nome, $email, $telefone): bool {
         $pessoa = $this -> pdo -> prepare("select id from pessoa where email = :email");
         $pessoa -> bindValue(":email", $email);
         $pessoa -> execute();
@@ -35,4 +35,12 @@ Class Pessoa {
             return true;
         } else { return false; }
     }
+
+    public function deletePessoa($id): void {
+        $pessoa = $this -> pdo -> prepare("delete from pessoa where id = :id");
+        $pessoa -> bindValue(":id", $id);
+        $pessoa -> execute();
+    }
+
+    public function editPessoa($id): void {}
 }
