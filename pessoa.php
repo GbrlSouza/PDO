@@ -19,4 +19,17 @@ Class Pessoa {
         if ($pessoas === false) { return []; }
         return $pessoas -> fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function addPessoa($nome, $email, $telefone) {
+        $pessoa = $this -> pdo -> prepare("selet id from pessoa where email = :email");
+        $pessoa -> bindValue(":email", $email);
+        $pessoa -> execute();
+
+        if ($pessoa -> rowCount() === 0) {
+            $pessoa = $this -> pdo -> prepare("insert into pessoa (nome, email, telefone) values (:nome, :email, :telefone)");
+            $pessoa -> bindValue(":nome", $nome);
+            $pessoa -> bindValue(":email", $email);
+            $pessoa -> bindValue(":telefone", $telefone);
+        }
+    }
 }
