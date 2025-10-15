@@ -26,7 +26,10 @@ $pessoas = new Pessoa("pdo", "localhost", "root", "");
         $telefone = addslashes($_POST['inputTelefone']);
 
         if (!empty($nome) && !empty($email) && !empty($telefone)) {
-          if ($pessoas -> updatePessoa($id, $nome, $email, $telefone)) { echo "<div class='alert alert-success text-center' role='alert'>Cadastro Atualizado com sucesso!</div>";}
+          if ($pessoas -> updatePessoa($id, $nome, $email, $telefone)) {
+            header("location: index.php");
+            echo "<div class='alert alert-success text-center' role='alert'>Cadastro Atualizado com sucesso!</div>";
+          }
           else { echo "<div class='alert alert-warning text-center' role='alert'>Email já cadastrado!</div>"; }
         } else { echo "<div class='alert alert-danger text-center' role='alert'>Preencha todos os campos!</div>"; }
       } else {
