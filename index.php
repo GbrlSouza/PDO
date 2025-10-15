@@ -19,14 +19,26 @@ $pessoas = new Pessoa("pdo", "localhost", "root", "");
   <body>
     <?php
     if (isset($_POST['inputNome'])) {
-      $nome = addslashes($_POST['inputNome']);
-      $email = addslashes($_POST['inputEmail']);
-      $telefone = addslashes($_POST['inputTelefone']);
+      if (isset($_GET['id_update']) && !empty($_GET['id_update'])) {
+        $id = addcslashes(trim($_GET['id_update']),'\'');
+        $nome = addslashes($_POST['inputNome']);
+        $email = addslashes($_POST['inputEmail']);
+        $telefone = addslashes($_POST['inputTelefone']);
 
-      if (!empty($nome) && !empty($email) && !empty($telefone)) {
-        if ($pessoas -> addPessoa($nome, $email, $telefone)) { echo "<div class='alert alert-success text-center' role='alert'>Pessoa cadastrada com sucesso!</div>";}
-        else { echo "<div class='alert alert-warning text-center' role='alert'>Email já cadastrado!</div>"; }
-      } else { echo "<div class='alert alert-danger text-center' role='alert'>Preencha todos os campos!</div>"; }
+        if (!empty($nome) && !empty($email) && !empty($telefone)) {
+          if ($pessoas -> updatePessoa($id, $nome, $email, $telefone)) { echo "<div class='alert alert-success text-center' role='alert'>Cadastro Atualizado com sucesso!</div>";}
+          else { echo "<div class='alert alert-warning text-center' role='alert'>Email já cadastrado!</div>"; }
+        } else { echo "<div class='alert alert-danger text-center' role='alert'>Preencha todos os campos!</div>"; }
+      } else {
+        $nome = addslashes($_POST['inputNome']);
+        $email = addslashes($_POST['inputEmail']);
+        $telefone = addslashes($_POST['inputTelefone']);
+
+        if (!empty($nome) && !empty($email) && !empty($telefone)) {
+          if ($pessoas -> addPessoa($nome, $email, $telefone)) { echo "<div class='alert alert-success text-center' role='alert'>Pessoa cadastrada com sucesso!</div>";}
+          else { echo "<div class='alert alert-warning text-center' role='alert'>Email já cadastrado!</div>"; }
+        } else { echo "<div class='alert alert-danger text-center' role='alert'>Preencha todos os campos!</div>"; }
+      }
     }
 
     if (isset($_GET['id_delete'])) {
