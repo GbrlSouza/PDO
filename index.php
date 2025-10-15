@@ -6,7 +6,7 @@ $pessoas = new Pessoa("pdo", "localhost", "root", "");
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
-    <title>PDO</title>
+    <title>PDO YT</title>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -47,7 +47,7 @@ $pessoas = new Pessoa("pdo", "localhost", "root", "");
       $id_pessoa = addslashes($_GET['id_update']);
       $pessoa = $pessoas -> searchPessoa($id_pessoa);
     }
-    
+
     if (isset($_GET['id_delete'])) {
       $id_pessoa = addslashes($_GET['id_delete']);
       $pessoas -> deletePessoa($id_pessoa);
