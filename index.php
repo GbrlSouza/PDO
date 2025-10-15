@@ -60,7 +60,7 @@ $pessoas = new Pessoa("pdo", "localhost", "root", "");
               <input type="tel" class="form-control" id="inputTelefone" name="inputTelefone" placeholder="(XX) XXXXX-XXXX" required value="<?php if (isset($pessoa)) { echo $pessoa['telefone']; } ?>">
             </div>
             <div class="col-12 mt-4">
-              <button type="submit" class="btn btn-success">Cadastrar Pessoa</button>
+              <input type="submit" class="btn btn-success" value="<?php if (isset($pessoa)) { echo "Atualizar Cadastro"; } else { echo "Cadastrar Pessoa"; } ?>">
               <button type="reset" class="btn btn-secondary ms-2">Limpar Formulário</button>
             </div>
           </div>
