@@ -29,8 +29,7 @@ $pessoas = new Pessoa("pdo", "localhost", "root", "");
           if ($pessoas -> updatePessoa($id, $nome, $email, $telefone)) {
             header("location: index.php");
             echo "<div class='alert alert-success text-center' role='alert'>Cadastro Atualizado com sucesso!</div>";
-          }
-          else { echo "<div class='alert alert-warning text-center' role='alert'>Email já cadastrado!</div>"; }
+          } else { echo "<div class='alert alert-warning text-center' role='alert'>Email já cadastrado!</div>"; }
         } else { echo "<div class='alert alert-danger text-center' role='alert'>Preencha todos os campos!</div>"; }
       } else {
         $nome = addslashes($_POST['inputNome']);
@@ -44,16 +43,16 @@ $pessoas = new Pessoa("pdo", "localhost", "root", "");
       }
     }
 
+    if (isset($_GET['id_update'])) {
+      $id_pessoa = addslashes($_GET['id_update']);
+      $pessoa = $pessoas -> searchPessoa($id_pessoa);
+    }
+    
     if (isset($_GET['id_delete'])) {
       $id_pessoa = addslashes($_GET['id_delete']);
       $pessoas -> deletePessoa($id_pessoa);
 
       header("location: index.php");
-    }
-
-    if (isset($_GET['id_update'])) {
-      $id_pessoa = addslashes($_GET['id_update']);
-      $pessoa = $pessoas -> searchPessoa($id_pessoa);
     }
     ?>
     <div class="container">
