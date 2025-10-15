@@ -42,5 +42,29 @@ Class Pessoa {
         $pessoa -> execute();
     }
 
-    public function editPessoa($id): void {}
+    public function updatePessoa($id, $nome, $email, $telefone): bool {
+        $pessoa = $this -> pdo -> prepare("select id from pessoa where email = :email and id != :id");
+        $pessoa -> bindValue(":email", $email);
+        $pessoa -> bindValue(":id", $id);
+        $pessoa -> execute();
+
+        if ($pessoa -> rowCount() === 0) {
+            $pessoa = $this -> pdo -> prepare("update pessoa set nome = :nome, email = :email, telefone = :telefone where id = :id");
+            $pessoa -> bindValue(":nome", $nome);
+            $pessoa -> bindValue(":email", $email);
+            $pessoa -> bindValue(":telefone", $telefone);
+            $pessoa -> bindValue(":id", $id);
+            $pessoa -> execute();
+            
+            return true;
+        } else { return false; }
+    }
+
+    public function searchPessoa($id): array {
+        $pessoa = $this -> pdo -> prepare("select * from pessoa where id = :id");
+        $pessoa -> bindValue(":id", $id);
+        $pessoa -> execute();
+
+        return $pessoa -> fetch(PDO::FETCH_ASSOC);
+    }
 }
