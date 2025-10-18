@@ -3,9 +3,8 @@ body {
     padding-bottom: 20px;
     background-color: #f8f9fa;
 }
-.container {
-    max-width: 960px; 
-}
+
+.container { max-width: 960px; }
 .form-section {
     background-color: #ffffff;
     padding: 20px;
@@ -13,6 +12,7 @@ body {
     box-shadow: 0 4px 8px rgba(0,0,0,.05);
     margin-bottom: 30px;
 }
+
 .table-section {
     background-color: #ffffff;
     padding: 20px;
